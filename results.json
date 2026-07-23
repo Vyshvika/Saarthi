@@ -1,0 +1,56 @@
+{
+  "dataset_size": {
+    "conversations": 15,
+    "turns": 61,
+    "confusion_turns_gt": 19,
+    "mastery_turns_gt": 11,
+    "neutral_turns_gt": 31
+  },
+  "confusion_detection": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 4,
+    "tn": 42,
+    "precision": 1.0,
+    "recall": 0.7894736842105263,
+    "f1": 0.8823529411764706,
+    "accuracy": 0.9344262295081968
+  },
+  "mastery_detection": {
+    "tp": 7,
+    "fp": 0,
+    "fn": 4,
+    "tn": 50,
+    "precision": 1.0,
+    "recall": 0.6363636363636364,
+    "f1": 0.7777777777777778,
+    "accuracy": 0.9344262295081968
+  },
+  "detector_performance_by_phrasing": {
+    "exact_marker_phrasing": {
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "paraphrased_no_exact_marker": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 8,
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1": 0.33333333333333337
+    }
+  },
+  "adaptation_behavior": {
+    "qualifying_confusion_streaks": 9,
+    "resolved_by_adaptive_system": 4,
+    "adaptive_resolution_rate": 0.4444444444444444,
+    "static_baseline_resolution_rate": 0.0,
+    "avg_level_changes_per_conversation": 0.4,
+    "max_level_changes_in_a_conversation": 2,
+    "pct_conversations_with_at_least_one_adjustment": 0.3333333333333333
+  }
+}
