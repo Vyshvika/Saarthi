@@ -13,10 +13,17 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const refreshSessions = useCallback(async () => {
+  try {
     const data = await listSessions();
     setSessions(data);
     if (data.length && !activeId) setActiveId(data[0].id);
-  }, [activeId]);
+  } catch (err) {
+    if (err.message === "UNAUTHENTICATED") {
+      localStorage.clear();
+      setAuthed(false);
+    }
+  }
+}, [activeId]);
 
   useEffect(() => {
     if (authed) refreshSessions();
@@ -40,18 +47,6 @@ export default function App() {
     setSessions([]);
     setActiveId(null);
   }
-  const refreshSessions = useCallback(async () => {
-  try {
-    const data = await listSessions();
-    setSessions(data);
-    if (data.length && !activeId) setActiveId(data[0].id);
-  } catch (err) {
-    if (err.message === "UNAUTHENTICATED") {
-      localStorage.clear();
-      setAuthed(false);
-    }
-  }
-}, [activeId]);
 
   if (!authed) return <Onboarding onAuthed={handleAuthed} />;
 
