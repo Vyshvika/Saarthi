@@ -35,6 +35,7 @@ export async function createSession() {
 
 export async function listSessions() {
   const res = await fetch(`${BASE}/chat/sessions`, { headers: authHeaders() });
+  if (res.status === 401) throw new Error("UNAUTHENTICATED");
   return res.json();
 }
 
