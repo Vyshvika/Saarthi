@@ -10,6 +10,7 @@ export default function App() {
   const [baseLevel, setBaseLevel] = useState(localStorage.getItem("saarthi_level") || "growth");
   const [sessions, setSessions] = useState([]);
   const [activeId, setActiveId] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const refreshSessions = useCallback(async () => {
     const data = await listSessions();
@@ -45,15 +46,15 @@ export default function App() {
   return (
     <div className="app-shell">
       <Sidebar
-      sessions={sessions}
-      activeId={activeId}
-      onSelect={setActiveId}
-      onNewChat={handleNewChat}
-      onLogout={handleLogout}
-      userName={userName}
-      isOpen={sidebarOpen}
-      onClose={() => setSidebarOpen(false)}
-    />
+        sessions={sessions}
+        activeId={activeId}
+        onSelect={setActiveId}
+        onNewChat={handleNewChat}
+        onLogout={handleLogout}
+        userName={userName}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
       {activeId ? (
         <ChatWindow sessionId={activeId} baseLevel={baseLevel} onMenuClick={() => setSidebarOpen(true)} />
       ) : (
