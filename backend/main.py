@@ -1,4 +1,5 @@
 import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -11,14 +12,21 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Saarthi API")
 
+# Always allow local dev. Add your main deployed frontend URL via the
+# FRONTEND_URL env var (comma-separated if you have more than one), e.g.
+#   FRONTEND_URL=https://saarthi-ruby.vercel.app
 allowed_origins = ["http://localhost:5173"]
-frontend_url = os.getenv("FRONTEND_URL")
-if frontend_url:
-    allowed_origins.append(frontend_url)
+frontend_url_env = os.getenv("FRONTEND_URL", "")
+if frontend_url_env:
+    allowed_origins += [u.strip() for u in frontend_url_env.split(",") if u.strip()]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
+    # Also allow any Vercel preview URL for this project (e.g.
+    # saarthi-hwa6n3bri-kotagirivyshvika-6989s-projects.vercel.app), so a new
+    # preview deploy on every push doesn't need a manual CORS update each time.
+    allow_origin_regex=r"https://saarthi.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
