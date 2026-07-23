@@ -3,7 +3,7 @@ import MessageBubble from "./MessageBubble";
 import CalibrationDial from "./CalibrationDial";
 import { getMessages, getLevel, sendMessageStream } from "../api";
 
-export default function ChatWindow({ sessionId, baseLevel }) {
+export default function ChatWindow({ sessionId, baseLevel, onMenuClick }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
@@ -61,6 +61,7 @@ export default function ChatWindow({ sessionId, baseLevel }) {
   return (
     <div className="chat-column">
       <div className="chat-header">
+        <button className="menu-btn" onClick={onMenuClick}>☰</button>
         <h2>Saarthi</h2>
         <CalibrationDial level={level} />
       </div>

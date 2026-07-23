@@ -45,15 +45,17 @@ export default function App() {
   return (
     <div className="app-shell">
       <Sidebar
-        sessions={sessions}
-        activeId={activeId}
-        onSelect={setActiveId}
-        onNewChat={handleNewChat}
-        onLogout={handleLogout}
-        userName={userName}
-      />
+      sessions={sessions}
+      activeId={activeId}
+      onSelect={setActiveId}
+      onNewChat={handleNewChat}
+      onLogout={handleLogout}
+      userName={userName}
+      isOpen={sidebarOpen}
+      onClose={() => setSidebarOpen(false)}
+    />
       {activeId ? (
-        <ChatWindow sessionId={activeId} baseLevel={baseLevel} />
+        <ChatWindow sessionId={activeId} baseLevel={baseLevel} onMenuClick={() => setSidebarOpen(true)} />
       ) : (
         <div className="chat-column">
           <div className="empty-state" style={{ height: "100%" }}>
